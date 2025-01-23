@@ -1,0 +1,35 @@
+[debug] [2025-01-23T21:56:15.479Z] ----------------------------------------------------------------------
+[debug] [2025-01-23T21:56:15.499Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js apphosting:backends:list
+[debug] [2025-01-23T21:56:15.499Z] CLI Version:   13.29.1
+[debug] [2025-01-23T21:56:15.500Z] Platform:      win32
+[debug] [2025-01-23T21:56:15.500Z] Node Version:  v20.17.0
+[debug] [2025-01-23T21:56:15.501Z] Time:          Thu Jan 23 2025 22:56:15 GMT+0100 (West Africa Standard Time)
+[debug] [2025-01-23T21:56:15.501Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-01-23T21:56:15.638Z] Checked if tokens are valid: false, expires at: 1737669247500
+[debug] [2025-01-23T21:56:15.639Z] Checked if tokens are valid: false, expires at: 1737669247500
+[debug] [2025-01-23T21:56:15.639Z] > refreshing access token with scopes: []
+[debug] [2025-01-23T21:56:15.642Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-01-23T21:56:15.642Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-01-23T21:56:25.012Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-01-23T21:56:25.012Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-01-23T21:56:25.023Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fir-queuepay/services/firebaseapphosting.googleapis.com [none]
+[debug] [2025-01-23T21:56:25.023Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fir-queuepay/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/fir-queuepay
+[debug] [2025-01-23T21:56:38.501Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fir-queuepay/services/firebaseapphosting.googleapis.com 200
+[debug] [2025-01-23T21:56:38.502Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fir-queuepay/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2025-01-23T21:56:38.503Z] Checked if tokens are valid: true, expires at: 1737672984013
+[debug] [2025-01-23T21:56:38.503Z] Checked if tokens are valid: true, expires at: 1737672984013
+[debug] [2025-01-23T21:56:38.505Z] >>> [apiv2][query] GET https://firebaseapphosting.googleapis.com/v1beta/projects/fir-queuepay/locations/-/backends 
+[debug] [2025-01-23T21:56:47.152Z] <<< [apiv2][status] GET https://firebaseapphosting.googleapis.com/v1beta/projects/fir-queuepay/locations/-/backends 200
+[debug] [2025-01-23T21:56:47.153Z] <<< [apiv2][body] GET https://firebaseapphosting.googleapis.com/v1beta/projects/fir-queuepay/locations/-/backends {"backends":[{"name":"projects/fir-queuepay/locations/us-central1/backends/fb-test","createTime":"2025-01-23T09:27:34.293348870Z","updateTime":"2025-01-23T09:28:42.480862Z","uri":"fb-test--fir-queuepay.us-central1.hosted.app","managedResources":[{"runService":{"service":"projects/849612244546/locations/us-central1/services/fb-test"}}],"codebase":{"repository":"projects/fir-queuepay/locations/us-central1/connections/apphosting-github-conn-hm3bqb5/gitRepositoryLinks/team-hanspet-headshot_dev","rootDirectory":"/"},"uid":"72ef2e10-4e66-4550-a888-a784680a882b","etag":"eUENZIcFkP3H-SAEJPgfBnmT3fbTSoc46vdxYOW5Hdc","reconciling":false,"servingLocality":"GLOBAL_ACCESS","serviceAccount":"firebase-app-hosting-compute@fir-queuepay.iam.gserviceaccount.com","appId":"1:849612244546:web:9d7c4823b3725d99830fdb"}]}
+[info] ┌─────────┬───────────────────────────┬──────────────────────────────────────────────────────┬─────────────┬─────────────────────┐
+│ Backend │ Repository                │ URL                                                  │ Location    │ Updated Date        │
+├─────────┼───────────────────────────┼──────────────────────────────────────────────────────┼─────────────┼─────────────────────┤
+│ fb-test │ team-hanspet-headshot_dev │ https://fb-test--fir-queuepay.us-central1.hosted.app │ us-central1 │ 2025-01-23 10:28:42 │
+└─────────┴───────────────────────────┴──────────────────────────────────────────────────────┴─────────────┴─────────────────────┘
+[debug] [2025-01-23T21:56:56.731Z] Error: Timed out.
+    at Timeout.<anonymous> (C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:269:49)
+    at listOnTimeout (node:internal/timers:581:17)
+    at process.processTimers (node:internal/timers:519:7)
+[error] 
+[error] Error: An unexpected error has occurred.
