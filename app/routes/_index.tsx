@@ -14,18 +14,54 @@ export const meta: MetaFunction = () => {
 export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
   const name = formData.get("name");
-  console.log("name is coming ", name);
+  const edit = formData.get("update");
+  const del = formData.get("delete");
+  console.log("name is coming ", name, edit, del);
 
-  // Call your Firebase Function
-  const response = await fetch("https://submitform-gobx5s7hoq-uc.a.run.app", {
-    method: "POST",
-    body: JSON.stringify({ task: name }),
-    headers: { "Content-Type": "application/json" },
-  });
+  if (name) {
+    // Call your Firebase Function
+    const response = await fetch("https://submitform-gobx5s7hoq-uc.a.run.app", {
+      method: "POST",
+      body: JSON.stringify({ task: name }),
+      headers: { "Content-Type": "application/json" },
+    });
 
-  const result = await response.json();
-  console.log(result);
-  return json(result);
+    const result = await response.json();
+    console.log(result);
+    return json(result);
+  }
+  if (edit) {
+    console.log("updating!!!");
+    // Call your Firebase Function
+    const response = await fetch(
+      "https://updatesubmission-gobx5s7hoq-uc.a.run.app",
+      {
+        method: "POST",
+        body: JSON.stringify({ id: edit }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
+    return json(result);
+  }
+  if (del) {
+    console.log("deleteing!!");
+    // Call your Firebase Function
+    const response = await fetch(
+      "https://deletesubmission-gobx5s7hoq-uc.a.run.app",
+      {
+        method: "DELETE",
+        body: JSON.stringify({ id: del }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
+    return json(result);
+  }
 };
 
 export default function Index() {
@@ -47,20 +83,14 @@ export default function Index() {
           />
           <button
             type="submit"
-            className="bg-yellow-800 hover:bg-slate-800 h-20 rounded-full text-xl font-bold text-black p-2 w-56 hover:text-white cursor-pointer"
-          >
+            className="bg-yellow-800 hover:bg-slate-800 h-20 rounded-full text-xl font-bold text-black p-2 w-56 hover:text-white cursor-pointer">
             Send
           </button>
         </div>
       </Form>
       <div className="flex-1 border bg-black rounded-3xl p-12 gap-10 flex flex-col">
-        {datas?.map((item) => (
-          <Task
-            key={item.id}
-            data={datas}
-            item={item}
-            setData={(val: any) => console.log("")}
-          />
+        {datas?.map((item: { id: string; task: string; status: boolean }) => (
+          <Task key={item.id} item={item} />
         ))}
       </div>
     </section>
@@ -68,13 +98,9 @@ export default function Index() {
 }
 
 function Task({
-  data,
   item,
-  setData,
 }: {
-  data: { status: boolean; task: string }[];
-  item: { status: boolean; task: string };
-  setData: (val: { status: boolean; task: string }[]) => void;
+  item: { status: boolean; task: string; id: string };
 }) {
   return (
     <div
@@ -86,35 +112,21 @@ function Task({
       </p>
       <div className="gap-3 flex">
         <Form method="post">
+          <input type="hidden" name="update" value={item.id} />
           <button
-            type="button"
+            type="submit"
             className={`${
               item.status ? "bg-green-700" : "bg-gray-700"
-            } hover:bg-gray-800 h-14 rounded-full text-xl font-bold text-white px-6  hover:text-black cursor-pointer`}
-            onClick={() => {
-              const filtered = data.map((items) => {
-                if (items.task === item.task) {
-                  return { ...items, status: true };
-                } else {
-                  return items;
-                }
-              });
-              setData(filtered);
-            }}>
+            } hover:bg-gray-800 h-14 rounded-full text-xl font-bold text-white px-6  hover:text-black cursor-pointer`}>
             {item.status ? "✔️" : "Mark as done"}
           </button>
         </Form>
         {!item.status && (
           <Form method="delete">
+            <input type="hidden" name="delete" value={item.id} />
             <button
-              type="button"
-              className="bg-red-600 hover:bg-red-800 h-14 rounded-full text-xl font-bold text-white p-2 w-24 hover:text-black cursor-pointer"
-              onClick={() => {
-                const filtered = data.filter(
-                  (items) => items.task !== item.task
-                );
-                setData(filtered);
-              }}>
+              type="submit"
+              className="bg-red-600 hover:bg-red-800 h-14 rounded-full text-xl font-bold text-white p-2 w-24 hover:text-black cursor-pointer">
               Delete
             </button>
           </Form>
